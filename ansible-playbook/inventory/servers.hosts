@@ -1,0 +1,7 @@
+#
+# Servers Inventory
+#
+
+[servers]
+server[0:3].example.com
+

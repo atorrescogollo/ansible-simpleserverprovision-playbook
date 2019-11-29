@@ -1,0 +1,11 @@
+#
+# Servers Variables
+#
+
+
+nameservers:
+  - 1.1.1.1
+  - 8.8.8.8
+
+authorized_keys: |
+  .... Private keys for ssh access ....

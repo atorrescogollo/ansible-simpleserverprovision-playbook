@@ -1,0 +1,42 @@
+#
+# Tasks File
+#
+
+- name: Setup hostname
+  copy:
+    dest: /etc/hostname
+    content: |
+      {{ inventory_hostname }}
+  register: hostnametask
+
+- name: Setup /etc/hosts
+  template:
+    src: etc_hosts.j2
+    dest: /etc/hosts
+
+- name: Setup /etc/resolv.conf
+  template:
+    src: etc_resolv.conf.j2
+    dest: /etc/resolv.conf
+
+- name: Ensure /root/.ssh dir exists
+  file:
+    path: /root/.ssh
+    state: directory
+    owner: root
+    group: root
+    mode: '0700'
+
+- name: Setup ssh authorized_keys
+  copy:
+    dest: /root/.ssh/authorized_keys
+    content: |
+      {{ authorized_keys }}
+
+- name: Reboot server
+  shell: "sleep 5 && reboot"
+  async: 1
+  poll: 0
+  when: hostnametask is changed
+  notify:
+    - Wait for server recovery

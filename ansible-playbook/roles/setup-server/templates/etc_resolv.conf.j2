@@ -1,0 +1,4 @@
+search {{ inventory_hostname.split('.')[1:] | join('.') }}
+{% for ns in nameservers %}
+nameserver {{ ns }}
+{% endfor %}

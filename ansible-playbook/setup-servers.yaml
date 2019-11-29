@@ -1,0 +1,8 @@
+#
+# Master Playbook
+#
+
+- name: Setup Servers
+  hosts: servers
+  roles:
+    - setup-server
