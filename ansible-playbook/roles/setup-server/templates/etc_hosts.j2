@@ -1,5 +1,13 @@
+{% if inventory_hostname.split('.')|length > 1 %}
 127.0.0.1 {{ inventory_hostname.split('.')[1] }} {{ inventory_hostname }}
+{% else %}
+127.0.0.1 {{ inventory_hostname}}
+{% endif %}
 
 {% for host in groups['servers'] %}
+{% if inventory_hostname.split('.')|length > 1 %}
 {{ ansible_ssh_host }}  {{ hostvars[host]['inventory_hostname'].split('.')[1] }}	{{ hostvars[host]['inventory_hostname'] }}
+{% else %}
+{{ ansible_ssh_host }}  {{ hostvars[host]['inventory_hostname'] }}
+{% endif %}
 {% endfor %}

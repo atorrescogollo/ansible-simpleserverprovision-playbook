@@ -1,4 +1,8 @@
+{% if inventory_hostname.split('.')|length > 1 %}
 search {{ inventory_hostname.split('.')[1:] | join('.') }}
+{% else %}
+search local
+{% endif %}
 {% for ns in nameservers %}
 nameserver {{ ns }}
 {% endfor %}

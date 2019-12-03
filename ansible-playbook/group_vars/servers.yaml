@@ -2,10 +2,9 @@
 # Servers Variables
 #
 
-
 nameservers:
   - 1.1.1.1
   - 8.8.8.8
 
-authorized_keys: |
-  .... Private keys for ssh access ....
+authorized_keys: ../sshdata/authorized_keys
+sethostname: no

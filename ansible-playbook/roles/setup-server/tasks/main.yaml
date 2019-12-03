@@ -8,6 +8,7 @@
     content: |
       {{ inventory_hostname }}
   register: hostnametask
+  when: sethostname is defined and sethostname == 'yes'
 
 - name: Setup /etc/hosts
   template:
@@ -29,9 +30,8 @@
 
 - name: Setup ssh authorized_keys
   copy:
+    src: "{{ authorized_keys }}"
     dest: /root/.ssh/authorized_keys
-    content: |
-      {{ authorized_keys }}
 
 - name: Reboot server
   shell: "sleep 5 && reboot"
